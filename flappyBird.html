@@ -1,0 +1,70 @@
+<html>
+  <head>
+    <title>Flappy Bird</title>
+    <link rel="stylesheet" type="text/css" href="css/navbar.css" />
+    <link rel="stylesheet" type="text/css" href="css/FlappyBird.css" />
+
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+    />
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  </head>
+
+  <body>
+    <nav>
+      <a href="video.html">Video </a>
+      <a href="flappyBird.html">Flappy Bird</a>
+      <a href="register.html">Registrazione</a>
+      <div id="indicator"></div>
+    </nav>
+
+    <div class="container-fluid-punti">
+      <div class="col-sm-2"></div>
+      <div class="col-sm-3">
+        <table>
+          <tr>
+            <td>Punteggio
+              <output id="punteggio"></output></td>
+          </tr>
+        </table>
+      </div>
+      <div class="col-sm-4"></div>
+      <div class="col-sm-2">
+        <table>
+          <tr>
+            <td><td>Record
+              <output id="record"></output>
+            </td></td>
+          </tr>
+        </table>
+      </div>
+      <div class="col-sm-2"></div>
+    </div>
+
+    <div class="container-fluid-button">
+      <div class="col-sm-4"></div>
+      <div class="col-sm-4">
+        <p>Premi un tasto del mouse per far iniziare il gioco</p>
+        <p>Per giocare devi fare click sul canvas</p>
+      </div>
+      <div class="col-sm-4"></div>
+    </div>
+
+    <div class="container-fluid">
+      <div class="col-sm-2"></div>
+      <div class="col-sm-8">
+        <center>
+          <canvas id="GameSpace" width="800px" height="600px"></canvas>
+        </center>
+      </div>
+      <div class="col-sm-2"></div>
+    </div>
+    <script type="text/javascript" src="script/FlappyGame.js"></script>
+  </body>
+</html>

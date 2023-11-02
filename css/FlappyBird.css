@@ -1,0 +1,25 @@
+.container-fluid-button {
+  width: 100%;
+  top: 15%;
+  position: absolute;
+  margin-top: 2%;
+}
+
+.container-fluid-punti {
+  width: 40%;
+  top: 15%;
+  left: 30%;
+  position: absolute;
+}
+
+.container-fluid-button p {
+  text-align: center;
+  margin-top: 15%;
+  color: green;
+}
+
+.container-fluid {
+  width: 100%;
+  bottom: 10%;
+  position: absolute;
+}

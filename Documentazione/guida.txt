@@ -1,0 +1,236 @@
+Idee Generali :
+    In generale per fare flappy bird bisogna avere alcuni elementi
+    -- disegnare il piccione sul canvas 
+    -- disegnare i tubi 
+    -- disegnare il terreno 
+
+    -- aggiornare la posizione del piccione
+    -- aggiornare la posizione dei tubi
+    -- aggiornare il punteggio 
+
+    -- controllare le collisioni con il terreno ma anche con i tubi 
+
+Come funziona
+
+    Aspettiamo che l'utente clicca sul canvas 
+    Nel momento in cui clicca allora faccio partire il gioco aggiornando 
+    lo stato.
+
+    Ogni frame aggiorno la velocita del piccione aumentandola in modo lineare 
+
+    Ogni volta che il giocatore clicca sul canvas faccio saltare il piccione verso l'alto 
+
+    Creo un tubo ogni 150 frames quindi ogni 1.3 secondi circa 
+
+    L'utente deve far passare il piccione dentro il gap in mezzo ai tubi 
+
+    Aspetto una collisione e faccio finire il gioco 
+
+Spiegazione dettagliata 
+
+(1) 
+    Creo il canvas e lo collego a gamespace 
+    Dico che il canvas e 2d 
+
+(2) 
+    frames serve per far avanzare il programma
+    lo aumentiamo alla fine di ogni update()
+    
+(3)
+    Carico le immagini dentro deli oggetti
+
+(4)
+    state memorizza lo stato attuale del gioco
+    ci sono tre stati
+    0 gioco non ancora avviato in attesa di un click
+    1 gioco in esecuzione in attesa di una collisione
+    2 gioco finito in attesa di reset 
+
+(5) 
+    in pratica aggiungo un listener al canvas 
+    quando clicci sul canvas lo switch esegue uno 
+    dei casi in base allo stato del gioco
+
+(6) 
+    Viene chiamata quando e rilevata una collisione 
+    e chiama le altre funzioni che fanno il reset
+
+(7)
+    drawPunteggi() serve disegnare il punteggio 
+    all'inizio
+    Prelevo il punteggio piu alto dal browser
+    Stampo il record
+    Stampo il punteggio 
+
+(8) 
+    la funzione draw dentro bird serve a disegnare il piccione 
+    sul canvas.
+
+    Per capire Meglio vedere drawImage.png
+
+    Questa riga sembra spaventosa pero si puo riassumere
+    ctx.drawImage(birdImg, 0, 0, this.w, this.h, 30, this.y, this.w, this.h)
+    
+    SOURCE
+    bird img = cosa bisogna disegnare a monitor 
+    0 = da dove disegnare l immagine source height 
+    0 = da dove disegnare l immagine source width 
+    this.w = indica la larghezza dell'immagine source 
+    this.h = indica l'altezza dell'immagine source
+
+    DESTINATION
+    30 = la posizione x del piccione sul canvas, costante perche la 
+    posizione orizzontale non cambia  
+    this.y = indica praticamente l'altezza del piccione 
+    this.w = la larghezza del piccione sullo schermo 
+    this.h = altezza del piccione sullo schermo
+
+(9)
+    fa saltare il piccione, sottraendo alla velocita il valore del salto    
+
+(10)
+    aggiorna i dati riguardanti posizione e velocita
+    // * 1 
+    Se lo stato corrente e uguale allo stato iniziale allora la posizione sara fissa 150
+
+    // * 2
+    altrimenti se lo stato e in game 
+    aggiorna l'altezza aggiungendogli la velocita
+    
+    // * 3 
+    se l'altezza del piccione + la grandezza del piccione sono maggiori
+    della grandezza del canvas - l'altezza del terreno vuol dire che il 
+    piccione ha superato il canvas quindi ha avuto una collisione
+    In questo caso portiamo il gioco a stato over 
+
+(11) 
+    Foreground ha lo scopo di disegnare a monitor il terreno 
+
+
+    // * 1 
+    ctx.drawImage(fgImg, 0, 0, 800, this.h, 0, cvs.height - this.h, 800, this.h);
+
+    Come prima 
+    SOURCE
+    fgImg e l'immagine
+    0 = dall'inizio
+    0 = dall'inizio 
+    800 = la larghezza del terreno nell'immagine sorgente
+    this.h = 160 cioe l'altezza del terreno nel sorgente
+
+    DESTINATION
+    0 = la posizione x del canvas in cui devo disegnare
+    cvs.height = restituisce l'altezza
+    infatti il terreno voglio metterlo alla base sottraggo - h perche 
+    senno il terrenno verrebbe disegnato oltre il limite del canvas 
+
+(12)
+    Pipe e probabilmente la funzione piu complessa perche deve gestire 
+    i tubi le loro posizioni la loro generazione e la loro distruzione
+    quando vanno oltre il canvas 
+
+    // * 1 
+    Array che contiene tutti i tubi
+
+    // * 2 
+    Funzione che disegna a monitor tutti i tubi 
+    Li prende uno ad uno dall'array e li disegna con il drawImage
+    Considerazione importante e che i tubi non sono davvero due
+    per posizione in memoria ma in realta e un solo tubo e per quello sotto 
+    ci aggiungo il gap che e costante
+
+    // * 3
+    Funzione che aggiorna la posizione dei tubi e li elimina
+
+    // * 4 
+    Se i frames diviso 150 == 0  allora aggiungo dentro l'array 
+    un nuovo tubo 
+    la x e uguale alla lunghezza del canvas quindi alla fine 
+    la y varia in modo random per fare in modo che i tubi hanno altezze
+    differenti
+    passed serve a vedere se il piccione ha superato quel tubo
+
+    // * 5 
+    Questo controllo serve ad impedire una caterva di errori per undefined 
+    serve a vedere se esistono tubi dentro l'array e se non esistono interrompe 
+    la funzione
+
+    // * 6 
+    Prelevo il primo tubo dall'array 
+
+    // * 7 
+    Controllo se il piccione non e in collisione con il tubo sopra e con il tubo sotto 
+    IMPORTANTE !
+    Credo che questo tipo di controllo abbia un certo impatto sulle prestazioni
+    per questo credo che andrebbe modificato, invece di controllare che il tubo non vada contro 
+    il piccione controllo se il piccione passa in mezzo al gap 
+
+    // *  8
+    Aggiorna la posizione di ogni tubo portandola a sinistra di 2px per ogni frame
+
+    // * 9 
+    Controlla se la posizione x del tubo e minore di 0, in quel caso il tubo e andato 
+    oltre il canvas e allora lo tolgo dall'array
+
+// * 13 
+Serve ad aggiornare il punteggio controllando quando si segna un punto
+
+    // * 1 
+    Controllo se lo stato e quello di gioco e se un primo tubo esiste
+    Potrebbe anche non esistere dato che magari non sono ancora passati 
+    150 frames 
+
+    // * 2 
+    Controllo se il primo tubo e gia stato passato o no 
+    Passed e necessaria perche visto che score.update() viene chiamata ogni frame
+    voglio aumentare il punteggio una sola volta e non ogni frame in cui il piccione
+    si trova nel gap tra i tubi  
+
+    prendo dall'array tutte le cose che mi servono quindi la posizione x 
+    la posizione y del tubo 
+    la posizione x e y del piccione 
+
+    poi controllo se la posizione orizzontale del piccione e maggiore rispetto a quella del tubo 
+    ergo se il piccione e tra i due tubi 
+
+    poi controllo che l'altezza del piccione sia maggiore dell'altezza del tubo alla base
+    e controolo se l'altezza del piccione sia minore dell'altezza del tubo di sotto 
+    se entrambe le condizioni sono vere allora aumento il punteggio di uno e modifico passed del tubo 
+    a 1 in modo che questo tuba non puo piu contare punti
+
+
+
+    // * 3 serve a disegnare dentro l'html il punteggio attuale 
+
+    // * 4 
+    fa il reset del punteggio attuale ma se il punteggio attuale e maggiore del record
+    allora aggiorna il record sostituendolo 
+
+// ? 14 
+
+    Funzione molto semplice il cui unico scopo e rimpire il canvas del colore specificato 
+
+    E poi richiama tutte gli altri draw();
+
+// ? 15
+
+    Serve ad aggiornare tutti i dati che verranno disegnati 
+
+// ? 16 
+
+    Funzione che richiama update e draw e aggiorna i frame 
+
+// ? 17
+
+    Set interval serve a chiamare la funzione ogni tot secondi, in questo caso 
+    la richiamiamo ogni 1000 ms / 120 = 8.3 ms 
+
+    modificando FPS modifichiamo la velocita del gioco 
+
+
+// ? 18 
+
+    Serve ad impedire al piccione di andare sopra il limite del canvas 
+
+
+

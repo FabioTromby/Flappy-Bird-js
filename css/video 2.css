@@ -1,0 +1,21 @@
+.container-fluid {
+  top: 15%;
+  width: 100%;
+  position: absolute;
+}
+
+.container-fluid-2 {
+  position: absolute;
+  top: 30%;
+  width: 100%;
+}
+
+.immagine {
+  max-height: 300px;
+  max-width: 300px;
+}
+
+iframe {
+  max-width: 800px;
+  max-height: 500px;
+}

@@ -1,0 +1,7 @@
+V 1.1
+-- BugFixes
+    sistemato un problema per il quale non veniva mostrato il punteggio massimo
+V 1.2
+-- Aggiunto
+    Documentazione del codice
+    Suoni in gioco 

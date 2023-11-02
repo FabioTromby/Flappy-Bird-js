@@ -1,0 +1,99 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+
+    <title>Video</title>
+    <link rel="stylesheet" type="text/css" href="css/navbar.css" />
+    <link rel="stylesheet" type="text/css" href="css/video 2.css" />
+    <script type="text/javascript" src="./script/script.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+    />
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  </head>
+
+  <body>
+    <nav>
+      <a href="video.html">Video </a>
+      <a href="flappyBird.html">Flappy Bird</a>
+      <a href="register.html">Registrazione</a>
+      <div id="indicator"></div>
+    </nav>
+
+    <div class="container-fluid">
+      <div class="col-sm-1"></div>
+
+      <div class="col-sm-2">
+        <button
+          class="btn btn-primary navbar-btn"
+          onclick="cambia(0)"
+          value="1"
+          id="bottone"
+        >
+          CSGO
+        </button>
+      </div>
+
+      <div class="col-sm-1"></div>
+
+      <div class="col-sm-2">
+        <button
+          class="btn btn-warning navbar-btn"
+          id="bottone"
+          onclick="cambia(1)"
+          value="2"
+        >
+          Valorant
+        </button>
+      </div>
+
+      <div class="col-sm-1"></div>
+
+      <div class="col-sm-2">
+        <button
+          class="btn btn-success navbar-btn"
+          id="bottone"
+          onclick="cambia(2)"
+          value="3"
+        >
+          Warzone
+        </button>
+      </div>
+
+      <div class="col-sm-1"></div>
+
+      <div class="col-sm-2">
+        <button
+          class="btn btn-info navbar-btn"
+          id="bottone"
+          onclick="cambia(3)"
+          value="4"
+        >
+          Overwatch
+        </button>
+      </div>
+    </div>
+
+    <div class="container-fluid-2">
+      <div class="col-sm-2"></div>
+      <div class="col-sm-6">
+        <table>
+          <tr>
+            <td id="mainVideo" class="video"></td>
+            <td><img id="img" class="immagine" /></td>
+          </tr>
+          <tr>
+            <td id="testo" colspan="2" class="txt"></td>
+          </tr>
+        </table>
+      </div>
+      <div class="col-sm-4"></div>
+    </div>
+  </body>
+</html>

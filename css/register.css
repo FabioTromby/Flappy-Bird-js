@@ -1,0 +1,10 @@
+.container-fluid {
+  top: 10%;
+  position: absolute;
+  width: 100%;
+}
+
+body {
+  background-image: url("../img/photo-1487700160041-babef9c3cb55.jpeg");
+  background-size: 100%;
+}
